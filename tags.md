@@ -32,3 +32,16 @@
 - #gastrointestinal
 - #endocrine
 - #renal
+
+## Complexity Level
+- #ultraHard
+- #multiSystem
+- #integrativePhysiology
+- #complexManagement
+- #multiOrganFailure
+
+## Clinical Reasoning
+- #bayesianAnalysis
+- #decisionAnalysis
+- #riskStratification
+- #evidenceIntegration

@@ -4,8 +4,8 @@ specialty: nephrology
 topic: acid-base
 difficulty: hard
 tags: [acidBase, criticalCare, electrolytes, compensation]
-created: 2024-01-17
-lastUpdated: 2024-01-17
+created: 2025-01-01
+lastUpdated: 2025-01-01
 ---
 
 # Complex Acid-Base Disorder Analysis
