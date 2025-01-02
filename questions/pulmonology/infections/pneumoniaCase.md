@@ -1,4 +1,3 @@
-
 ---
 id: PULM003
 specialty: pulmonology
