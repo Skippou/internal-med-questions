@@ -30,6 +30,9 @@ function convertMarkdownFiles(questionsDir, outputDir) {
                 const content = fs.readFileSync(filepath, 'utf8');
                 const { data, content: markdownContent } = matter(content);
                 
+                // Calculate path to root based on current file depth
+                const pathToRoot = '../'.repeat(relativeToQuestions.split('/').length + 1);
+                
                 const html = `
 <!DOCTYPE html>
 <html>
@@ -37,10 +40,10 @@ function convertMarkdownFiles(questionsDir, outputDir) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.topic || 'Medical Question'}</title>
-    <link rel="stylesheet" href="${'../'.repeat(relativeToQuestions.split('/').length)}styles/main.css">
+    <link rel="stylesheet" href="${pathToRoot}styles/main.css">
 </head>
 <body>
-    <a href="${'../'.repeat(relativeToQuestions.split('/').length)}index.html" class="back-to-list">← Back to Questions</a>
+    <a href="${pathToRoot}index.html" class="back-to-list">← Back to Questions</a>
     <script>
         function saveToLocalStorage(key, value) {
             try {
