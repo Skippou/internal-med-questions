@@ -3,7 +3,7 @@ id: CRIT002
 specialty: critical-care
 topic: MODS
 difficulty: ultra-hard
-tags: [multiOrganFailure, complexManagement, integrativePhysiology, hemodynamics, ARDS, sepsis, DIC]
+tags: [multiOrganFailure, complexManagement, integrativePhysiology, hemodynamics, ARDS, sepsis, DIC, claude35Sonnet, copilot]
 created: 2025-01-01
 lastUpdated: 2025-01-01
 ---

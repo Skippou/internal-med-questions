@@ -3,7 +3,7 @@ id: CARD001
 specialty: cardiology
 topic: arrhythmias
 difficulty: medium
-tags: [afib, anticoagulation, strokePrevention]
+tags: [afib, anticoagulation, strokePrevention, claude35Sonnet]
 created: 2025-01-01
 lastUpdated: 2025-01-01
 ---
