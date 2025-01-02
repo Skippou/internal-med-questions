@@ -4,8 +4,8 @@ specialty: pulmonology
 topic: pneumonia
 difficulty: medium
 tags: [respiratory, treatment, clinicalCase]
-created: 2025-01-04
-lastUpdated: 2025-01-04
+created: 2025-01-02
+lastUpdated: 2025-01-02
 ---
 
 # Community-Acquired Pneumonia

@@ -4,8 +4,8 @@ specialty: pulmonology
 topic: inhalation
 difficulty: medium
 tags: [respiratory, emergencies, copilotO1]
-created: 2025-01-03
-lastUpdated: 2025-01-03
+created: 2025-01-02
+lastUpdated: 2025-01-02
 ---
 
 # Smoke Inhalation Injury Management
