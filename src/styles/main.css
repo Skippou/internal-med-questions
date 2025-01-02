@@ -104,3 +104,9 @@ label {
     align-items: center;
     gap: 5px;
 }
+
+.question-count {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #666;
+}

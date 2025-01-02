@@ -31,6 +31,8 @@
                 <option value="unviewed">Unviewed Only</option>
             </select>
         </div>
+        <!-- Add count display -->
+        <div id="questionCount" class="question-count"></div>
         <div id="questions"></div>
     </div>
 
@@ -84,6 +86,10 @@
                     return viewedFilter === 'viewed' ? isViewed : !isViewed;
                 });
             }
+
+            // Update question count
+            const countDisplay = document.getElementById('questionCount');
+            countDisplay.textContent = `Showing ${filtered.length} question${filtered.length !== 1 ? 's' : ''}`;
 
             const questionsDiv = document.getElementById('questions');
             const isGitHubPages = location.hostname.includes('github.io');
