@@ -1,0 +1,18 @@
+{
+  "name": "internal-med-questions",
+  "version": "1.0.0",
+  "description": "Internal Medicine Question Bank",
+  "scripts": {
+    "clean": "rimraf \"./public/questions\"",
+    "index": "node scripts/indexQuestions.js",
+    "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public/questions')\"",
+    "build": "npm run clean && npm run convert && npm run index",
+    "serve": "npm run build && http-server public"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "http-server": "^14.1.1",
+    "marked": "^4.0.12",
+    "rimraf": "^3.0.2"
+  }
+}

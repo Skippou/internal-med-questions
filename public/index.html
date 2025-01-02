@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Medicine Questions</title>
+    <style>
+        .question-list {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        .question-item {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="question-list">
+        <div class="filters">
+            <label for="specialty">Filter by Specialty:</label>
+            <select id="specialty">
+                <option value="">All Specialties</option>
+            </select>
+            
+            <label for="difficulty">Filter by Difficulty:</label>
+            <select id="difficulty">
+                <option value="">All Difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                <option value="ultra-hard">Ultra Hard</option>
+            </select>
+        </div>
+        <div id="questions"></div>
+    </div>
+
+    <script>
+        async function loadQuestions() {
+            const isGitHubPages = location.hostname.includes('github.io');
+            const basePath = isGitHubPages ? '/internal-med-questions' : '';
+            const response = await fetch(`${basePath}/questionIndex.json`);
+            const questions = await response.json();
+            
+            // Populate specialty dropdown
+            const specialties = [...new Set(questions.map(q => q.specialty))].sort();
+            const specialtySelect = document.getElementById('specialty');
+            specialties.forEach(specialty => {
+                const option = document.createElement('option');
+                option.value = specialty;
+                option.textContent = specialty.charAt(0).toUpperCase() + specialty.slice(1);
+                specialtySelect.appendChild(option);
+            });
+
+            function filterQuestions() {
+                const selectedSpecialty = specialtySelect.value;
+                const selectedDifficulty = document.getElementById('difficulty').value;
+                
+                let filtered = questions;
+                if (selectedSpecialty) {
+                    filtered = filtered.filter(q => q.specialty === selectedSpecialty);
+                }
+                if (selectedDifficulty) {
+                    filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
+                }
+
+                const questionsDiv = document.getElementById('questions');
+                questionsDiv.innerHTML = filtered.map(q => `
+                    <div class="question-item">
+                        <h3>${q.title}</h3>
+                        <p>Specialty: ${q.specialty}</p>
+                        <p>Topic: ${q.topic}</p>
+                        <p>Difficulty: ${q.difficulty}</p>
+                        <a href="${isGitHubPages ? `${basePath}/` : ''}${q.filepath}" target="_blank">View Question</a>
+                    </div>
+                `).join('');
+            }
+
+            specialtySelect.addEventListener('change', filterQuestions);
+            document.getElementById('difficulty').addEventListener('change', filterQuestions);
+            
+            filterQuestions();
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>
