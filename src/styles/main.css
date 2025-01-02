@@ -36,6 +36,15 @@ details {
     padding: 10px;
     background: #f5f5f5;
     border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.filters > label {
+    display: block;
+    margin-bottom: 5px;
 }
 
 .question-item {
@@ -60,6 +69,15 @@ details {
 }
 
 select {
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+the 
+select[multiple] {
+    min-width: 200px;
+    min-height: 100px;
     padding: 5px;
     margin: 0 10px;
     border-radius: 4px;
