@@ -1,5 +1,7 @@
 # Internal Medicine Exam Prep Questions
 
+> **AI-Generated Content Notice**: This repository contains content primarily generated using artificial intelligence (GitHub Copilot & Claude 3.5 Sonnet). While this may affect certain intellectual property rights, we maintain an open sharing philosophy through Creative Commons licensing.
+
 A comprehensive collection of practice questions for internal medicine exam preparation.
 
 ## Quick Start
@@ -44,15 +46,30 @@ internal-med-questions/
 
 ## License
 
-MIT License - See [LICENSE](LICENSE)
+This work is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0). See [LICENSE](LICENSE.md) for details.
 
-## Disclaimer
+### License Clarification for AI-Generated Content
+- The CC BY-NC-SA 4.0 license applies to this compilation as a whole
+- AI-generated content may have different intellectual property implications
+- Our commitment is to keep this educational resource freely available while preventing commercial exploitation
+- Users should attribute both the project and acknowledge its AI-generated nature
 
-> **Important**: The majority of the content in this repository was generated using artificial intelligence (GitHub Copilot & Claude 3.5 Sonnet). While efforts have been made to ensure accuracy, all information should be verified against current medical literature and guidelines. This resource is intended for educational purposes only and should not be used as a primary source for clinical decision-making.
+## Disclaimers
 
-## Medical Disclaimer
+### AI Content Disclaimer
+The questions and explanations in this repository were generated using artificial intelligence tools. While we've attempted to verify accuracy, AI can:
+- Produce incorrect or outdated medical information
+- Generate inconsistent or contradictory content
+- Reflect training data biases
 
-This content is for educational purposes only and is not intended to serve as medical advice. Always consult appropriate medical literature and current clinical guidelines for actual patient care decisions.
+### Medical Disclaimer
+This content is for educational purposes only. It should not be used for:
+- Direct clinical decision-making
+- Patient care guidance
+- Replacement of proper medical education
+- Substitute for current clinical guidelines
 
----
+Always verify information against authoritative medical sources and current clinical guidelines.
+
+--- 
 [Report Issues](https://github.com/yourusername/internal-med-questions/issues) | [View Wiki](https://github.com/yourusername/internal-med-questions/wiki)
