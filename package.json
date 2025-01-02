@@ -8,7 +8,8 @@
     "index": "node scripts/indexQuestions.js",
     "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public/questions')\"",
     "build": "npm run clean && npm run copy-static && npm run convert && npm run index",
-    "serve": "npm run build && http-server public"
+    "serve": "npm run build && http-server public",
+    "start": "npm run clean && npm run build && npm run serve"
   },
   "dependencies": {
     "copyfiles": "^2.4.1",
