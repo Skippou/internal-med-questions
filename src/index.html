@@ -107,10 +107,22 @@
                         <p>Specialty: ${q.specialty}</p>
                         <p>Topic: ${q.topic}</p>
                         <p>Difficulty: ${q.difficulty}</p>
-                        <a href="${questionPath}" target="_blank">View Question</a>
+                        <a href="${questionPath}" 
+                           onclick="markViewed('${normalizedPath}')" 
+                           target="_blank">View Question</a>
                     </div>
                 `;
             }).join('');
+        };
+
+        // Add new markViewed function
+        window.markViewed = function(path) {
+            const viewedQuestions = getFromLocalStorage('viewedQuestions');
+            if (!viewedQuestions.includes(path)) {
+                viewedQuestions.push(path);
+                saveToLocalStorage('viewedQuestions', viewedQuestions);
+                window.filterQuestions(); // Refresh the list immediately
+            }
         };
 
         async function loadQuestions() {
