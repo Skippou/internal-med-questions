@@ -29,11 +29,46 @@ A 50-year-old patient with chronic productive cough and recurrent infections on 
 A
 
 ## Explanation
-1. Airway clearance plus inhaled antibiotics is standard for Pseudomonas.  
-2. Chronic oral steroids (B) not first-line.  
-3. Lobectomy (D) only for localized, refractory disease.
+1. Correct Answer (A) Rationale:
+   - Airway clearance techniques improve mucus clearance and reduce exacerbations
+   - Inhaled tobramycin for Pseudomonas:
+     * Achieves high local drug concentrations
+     * Minimizes systemic toxicity
+     * Proven mortality benefit in colonized patients
+   - Combination shown to reduce hospitalization rate by 50%
+
+2. Why Other Options Are Wrong:
+   - Option B (Oral steroids):
+     * No evidence for routine use
+     * Risk of immunosuppression
+     * May worsen infections
+   
+   - Option C (Supportive oxygen):
+     * Passive approach
+     * Doesn't address infection
+     * Disease progression continues
+   
+   - Option D (Immediate lobectomy):
+     * Too aggressive
+     * Reserved for:
+       * Failed medical management
+       * Localized disease
+       * Massive hemoptysis
+   
+   - Option E (Macrolide monotherapy):
+     * Inadequate for Pseudomonas
+     * Risk of resistance
+     * Duration too short
+
+3. Clinical Pearls:
+   - Regular airway clearance is cornerstone of therapy
+   - Pseudomonas colonization marks disease severity
+   - Treatment requires both infection control and mechanical clearance
+   - Long-term management plan essential
 
 ## References
 - ERS Guidelines for Bronchiectasis 2021
 - NEJM 2018: "Bronchiectasis Management"
+- Cochrane Review 2022: "Airway clearance in bronchiectasis"
+- Chest 2021: "Management of Pseudomonas in Bronchiectasis"
 </details>
