@@ -35,7 +35,7 @@
     </div>
 
     <script>
-        let questionsData = []; // Add this at the top
+        window.questionsData = []; // Make questionsData global
 
         // Storage utilities
         function saveToLocalStorage(key, value) {
@@ -60,15 +60,15 @@
             }
         }
 
-        // Move filterQuestions outside loadQuestions
-        function filterQuestions() {
+        // Make filterQuestions globally accessible
+        window.filterQuestions = function() {
             const specialtySelect = document.getElementById('specialty');
             const selectedSpecialty = specialtySelect.value;
             const selectedDifficulty = document.getElementById('difficulty').value;
             const viewedFilter = document.getElementById('viewedFilter').value;
             const viewedQuestions = getFromLocalStorage('viewedQuestions');
             
-            let filtered = questionsData; // Use the global questionsData
+            let filtered = window.questionsData; // Use global questionsData
             if (selectedSpecialty) {
                 filtered = filtered.filter(q => q.specialty === selectedSpecialty);
             }
@@ -111,16 +111,16 @@
                     </div>
                 `;
             }).join('');
-        }
+        };
 
         async function loadQuestions() {
             const isGitHubPages = location.hostname.includes('github.io');
             const basePath = isGitHubPages ? '/internal-med-questions' : '';
             const response = await fetch(`${basePath}/questionIndex.json`);
-            questionsData = await response.json(); // Store in global variable
+            window.questionsData = await response.json(); // Store in global variable
             
             // Populate specialty dropdown
-            const specialties = [...new Set(questionsData.map(q => q.specialty))].sort();
+            const specialties = [...new Set(window.questionsData.map(q => q.specialty))].sort();
             const specialtySelect = document.getElementById('specialty');
             specialties.forEach(specialty => {
                 const option = document.createElement('option');
@@ -136,14 +136,14 @@
             filterQuestions();
         }
 
-        // Update unmark function to call filterQuestions
+        // Update unmark function to call global filterQuestions
         window.unmarkViewed = function(path) {
             const viewedQuestions = getFromLocalStorage('viewedQuestions');
             const index = viewedQuestions.indexOf(path);
             if (index > -1) {
                 viewedQuestions.splice(index, 1);
                 saveToLocalStorage('viewedQuestions', viewedQuestions);
-                filterQuestions(); // This will now work since it's in the global scope
+                window.filterQuestions(); // Call the global function
             }
         };
 
