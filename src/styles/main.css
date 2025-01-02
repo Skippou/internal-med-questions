@@ -47,6 +47,26 @@ details {
     margin-bottom: 5px;
 }
 
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.toggle-all {
+    padding: 4px 8px;
+    background: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.toggle-all:hover {
+    background: #d0d0d0;
+}
+
 .question-item {
     border: 1px solid #ddd;
     margin: 10px 0;
@@ -74,10 +94,10 @@ select {
     border-radius: 4px;
     border: 1px solid #ddd;
 }
-the 
+
 select[multiple] {
     min-width: 200px;
-    min-height: 100px;
+    min-height: 150px;
     padding: 5px;
     margin: 0 10px;
     border-radius: 4px;

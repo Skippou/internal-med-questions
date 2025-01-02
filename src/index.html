@@ -10,26 +10,32 @@
     <h1>Internal Medicine Questions</h1>
     <div class="question-list">
         <div class="filters">
-            <label for="specialty">Filter by Specialty:</label>
-            <select id="specialty" multiple>
-                <option value="">All Specialties</option>
-            </select>
+            <div class="filter-group">
+                <label for="specialty">Filter by Specialty:</label>
+                <button class="toggle-all" onclick="toggleAll('specialty')">Select All/None</button>
+                <select id="specialty" multiple>
+                </select>
+            </div>
             
-            <label for="difficulty">Filter by Difficulty:</label>
-            <select id="difficulty" multiple>
-                <option value="">All Difficulties</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="ultra-hard">Ultra Hard</option>
-            </select>
+            <div class="filter-group">
+                <label for="difficulty">Filter by Difficulty:</label>
+                <button class="toggle-all" onclick="toggleAll('difficulty')">Select All/None</button>
+                <select id="difficulty" multiple>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="ultra-hard">Ultra Hard</option>
+                </select>
+            </div>
 
-            <label for="viewedFilter">Show:</label>
-            <select id="viewedFilter">
-                <option value="all">All Questions</option>
-                <option value="viewed">Viewed Only</option>
-                <option value="unviewed">Unviewed Only</option>
-            </select>
+            <div class="filter-group">
+                <label for="viewedFilter">Filter by Viewed:</label>
+                <select id="viewedFilter">
+                    <option value="all">All Questions</option>
+                    <option value="viewed">Viewed Only</option>
+                    <option value="unviewed">Unviewed Only</option>
+                </select>
+            </div>
         </div>
         <!-- Add count display -->
         <div id="questionCount" class="question-count"></div>
@@ -156,6 +162,14 @@
             }
         };
 
+        // Add toggle function
+        window.toggleAll = function(selectId) {
+            const select = document.getElementById(selectId);
+            const allSelected = Array.from(select.options).every(opt => opt.selected);
+            Array.from(select.options).forEach(opt => opt.selected = !allSelected);
+            filterQuestions(true);
+        };
+
         // Modify the loadQuestions function
         async function loadQuestions() {
             const isGitHubPages = location.hostname.includes('github.io');
@@ -163,7 +177,7 @@
             const response = await fetch(`${basePath}/questionIndex.json`);
             window.questionsData = await response.json(); // Store in global variable
             
-            // Populate specialty dropdown
+            // Populate specialty dropdown (remove "All Specialties" option)
             const specialties = [...new Set(window.questionsData.map(q => q.specialty))].sort();
             const specialtySelect = document.getElementById('specialty');
             specialties.forEach(specialty => {
@@ -173,15 +187,22 @@
                 specialtySelect.appendChild(option);
             });
 
-            // Set initial filter values from URL
+            // Set initial filter values from URL or select all by default
             const urlParams = getUrlParams();
+            const hasSpecialtiesInUrl = urlParams.specialties.length > 0;
+            const hasDifficultiesInUrl = urlParams.difficulties.length > 0;
+
             Array.from(specialtySelect.options).forEach(option => {
-                option.selected = urlParams.specialties.includes(option.value);
+                option.selected = hasSpecialtiesInUrl ? 
+                    urlParams.specialties.includes(option.value) : 
+                    true; // Select all by default
             });
             
             const difficultySelect = document.getElementById('difficulty');
             Array.from(difficultySelect.options).forEach(option => {
-                option.selected = urlParams.difficulties.includes(option.value);
+                option.selected = hasDifficultiesInUrl ? 
+                    urlParams.difficulties.includes(option.value) : 
+                    true; // Select all by default
             });
             
             document.getElementById('viewedFilter').value = urlParams.viewed;
