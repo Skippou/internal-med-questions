@@ -104,7 +104,15 @@
                     const questionPath = `${isGitHubPages ? `${basePath}/` : ''}${q.filepath}`;
                     return `
                         <div class="question-item ${isViewed ? 'viewed' : ''}">
-                            <h3>${q.title} ${isViewed ? '<span class="viewed-indicator">Viewed</span>' : ''}</h3>
+                            <h3>
+                                ${q.title}
+                                ${isViewed ? `
+                                    <span class="viewed-controls">
+                                        <span class="viewed-indicator">Viewed</span>
+                                        <button class="unmark-viewed" onclick="unmarkViewed('${normalizedPath}')">×</button>
+                                    </span>
+                                ` : ''}
+                            </h3>
                             <p>Specialty: ${q.specialty}</p>
                             <p>Topic: ${q.topic}</p>
                             <p>Difficulty: ${q.difficulty}</p>
@@ -120,6 +128,17 @@
             
             filterQuestions();
         }
+
+        // Add unmark function
+        window.unmarkViewed = function(path) {
+            const viewedQuestions = getFromLocalStorage('viewedQuestions');
+            const index = viewedQuestions.indexOf(path);
+            if (index > -1) {
+                viewedQuestions.splice(index, 1);
+                saveToLocalStorage('viewedQuestions', viewedQuestions);
+                filterQuestions(); // Refresh the list
+            }
+        };
 
         loadQuestions();
     </script>

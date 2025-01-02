@@ -83,3 +83,24 @@ label {
 .back-to-list:hover {
     background: #e0e0e0;
 }
+
+.unmark-viewed {
+    background: none;
+    border: none;
+    color: #4CAF50;
+    cursor: pointer;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+
+.unmark-viewed:hover {
+    text-decoration: underline;
+    color: #388E3C;
+}
+
+.viewed-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
