@@ -37,15 +37,55 @@ function convertMarkdownFiles(questionsDir, outputDir) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.topic || 'Medical Question'}</title>
-    <style>
-        body { max-width: 800px; margin: 40px auto; padding: 0 20px; font-family: -apple-system, system-ui, sans-serif; }
-        pre { overflow-x: auto; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        details { margin: 20px 0; padding: 10px; background: #f5f5f5; border-radius: 4px; }
-    </style>
+    <link rel="stylesheet" href="${'../'.repeat(relativeToQuestions.split('/').length)}styles/main.css">
 </head>
 <body>
+    <a href="${'../'.repeat(relativeToQuestions.split('/').length)}index.html" class="back-to-list">← Back to Questions</a>
+    <script>
+        function saveToLocalStorage(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                console.log('Saved to localStorage:', key, value);
+                return true;
+            } catch (e) {
+                console.error('Failed to save to localStorage:', e);
+                return false;
+            }
+        }
+
+        function getFromLocalStorage(key, defaultValue = []) {
+            try {
+                const value = localStorage.getItem(key);
+                console.log('Read from localStorage:', key, value);
+                return value ? JSON.parse(value) : defaultValue;
+            } catch (e) {
+                console.error('Failed to read from localStorage:', e);
+                return defaultValue;
+            }
+        }
+
+        // Normalize path for tracking
+        const isGitHubPages = location.hostname.includes('github.io');
+        const fullPath = location.pathname;
+        const questionPath = fullPath
+            .replace('/internal-med-questions/', '/')  // Remove repo name if on GitHub Pages
+            .split('/')
+            .filter(Boolean)  // Remove empty segments
+            .join('/');      // Reconstruct path
+        
+        console.log('Current path:', questionPath);
+        
+        // Store normalized path
+        const storageKey = 'viewedQuestions';
+        const viewedQuestions = getFromLocalStorage(storageKey);
+        
+        if (!viewedQuestions.includes(questionPath)) {
+            viewedQuestions.push(questionPath);
+            if (saveToLocalStorage(storageKey, viewedQuestions)) {
+                console.log('Successfully marked as viewed:', questionPath);
+            }
+        }
+    </script>
     ${marked.parse(markdownContent)}
 </body>
 </html>`;

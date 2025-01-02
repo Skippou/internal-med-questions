@@ -12,21 +12,27 @@ function indexQuestions(questionsDir) {
                 walkSync(filepath);
             } else if (path.extname(file) === '.md') {
                 const content = fs.readFileSync(filepath, 'utf8');
-                const { data } = matter(content);
+                const { data, content: markdownContent } = matter(content);
                 if (data.specialty) {
-                    // Extract just the path after 'questions' directory
+                    // Get the first non-empty line after frontmatter that starts with #
+                    const title = markdownContent
+                        .split('\n')
+                        .find(line => line.trim().startsWith('# '))
+                        ?.replace('# ', '')
+                        ?.trim() || 'Untitled Question';
+                        
                     const relativePath = filepath
-                        .split(/[\/\\]questions[\/\\]/)[1]  // Split on questions directory
-                        .replace(/\\/g, '/')    // Convert backslashes to forward slashes
+                        .split(/[\/\\]questions[\/\\]/)[1]
+                        .replace(/\\/g, '/')
                         .replace('.md', '.html');
                         
                     questions.push({
-                        filepath: `questions/${relativePath}`, // Add questions prefix
+                        filepath: `questions/${relativePath}`,
                         specialty: data.specialty,
                         topic: data.topic,
                         difficulty: data.difficulty,
                         id: data.id,
-                        title: content.split('\n')[0].replace('# ', '')
+                        title: title
                     });
                 }
             }

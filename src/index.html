@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Medicine Questions</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <h1>Internal Medicine Questions</h1>
+    <div class="question-list">
+        <div class="filters">
+            <label for="specialty">Filter by Specialty:</label>
+            <select id="specialty">
+                <option value="">All Specialties</option>
+            </select>
+            
+            <label for="difficulty">Filter by Difficulty:</label>
+            <select id="difficulty">
+                <option value="">All Difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                <option value="ultra-hard">Ultra Hard</option>
+            </select>
+
+            <label for="viewedFilter">Show:</label>
+            <select id="viewedFilter">
+                <option value="all">All Questions</option>
+                <option value="viewed">Viewed Only</option>
+                <option value="unviewed">Unviewed Only</option>
+            </select>
+        </div>
+        <div id="questions"></div>
+    </div>
+
+    <script>
+        // Storage utilities
+        function saveToLocalStorage(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                console.log('Saved to localStorage:', key, value);
+                return true;
+            } catch (e) {
+                console.error('Failed to save to localStorage:', e);
+                return false;
+            }
+        }
+
+        function getFromLocalStorage(key, defaultValue = []) {
+            try {
+                const value = localStorage.getItem(key);
+                console.log('Read from localStorage:', key, value);
+                return value ? JSON.parse(value) : defaultValue;
+            } catch (e) {
+                console.error('Failed to read from localStorage:', e);
+                return defaultValue;
+            }
+        }
+
+        async function loadQuestions() {
+            const isGitHubPages = location.hostname.includes('github.io');
+            const basePath = isGitHubPages ? '/internal-med-questions' : '';
+            const response = await fetch(`${basePath}/questionIndex.json`);
+            const questions = await response.json();
+            
+            // Populate specialty dropdown
+            const specialties = [...new Set(questions.map(q => q.specialty))].sort();
+            const specialtySelect = document.getElementById('specialty');
+            specialties.forEach(specialty => {
+                const option = document.createElement('option');
+                option.value = specialty;
+                option.textContent = specialty.charAt(0).toUpperCase() + specialty.slice(1);
+                specialtySelect.appendChild(option);
+            });
+
+            function filterQuestions() {
+                const selectedSpecialty = specialtySelect.value;
+                const selectedDifficulty = document.getElementById('difficulty').value;
+                const viewedFilter = document.getElementById('viewedFilter').value;
+                const viewedQuestions = getFromLocalStorage('viewedQuestions');
+                
+                let filtered = questions;
+                if (selectedSpecialty) {
+                    filtered = filtered.filter(q => q.specialty === selectedSpecialty);
+                }
+                if (selectedDifficulty) {
+                    filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
+                }
+                if (viewedFilter !== 'all') {
+                    filtered = filtered.filter(q => {
+                        const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
+                        const isViewed = viewedQuestions.some(viewed => 
+                            viewed.split('/').filter(Boolean).join('/') === normalizedPath
+                        );
+                        return viewedFilter === 'viewed' ? isViewed : !isViewed;
+                    });
+                }
+
+                const questionsDiv = document.getElementById('questions');
+                questionsDiv.innerHTML = filtered.map(q => {
+                    const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
+                    const isViewed = viewedQuestions.includes(normalizedPath);
+                    const questionPath = `${isGitHubPages ? `${basePath}/` : ''}${q.filepath}`;
+                    return `
+                        <div class="question-item ${isViewed ? 'viewed' : ''}">
+                            <h3>${q.title} ${isViewed ? '<span class="viewed-indicator">Viewed</span>' : ''}</h3>
+                            <p>Specialty: ${q.specialty}</p>
+                            <p>Topic: ${q.topic}</p>
+                            <p>Difficulty: ${q.difficulty}</p>
+                            <a href="${questionPath}" target="_blank">View Question</a>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            specialtySelect.addEventListener('change', filterQuestions);
+            document.getElementById('difficulty').addEventListener('change', filterQuestions);
+            document.getElementById('viewedFilter').addEventListener('change', filterQuestions);
+            
+            filterQuestions();
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>

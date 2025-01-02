@@ -1,0 +1,85 @@
+body {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: -apple-system, system-ui, sans-serif;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+details {
+    margin: 20px 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.question-list {
+    width: 100%;
+}
+
+.filters {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.question-item {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.question-item.viewed {
+    border-left: 4px solid #4CAF50;
+}
+
+.viewed-indicator {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+select {
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+label {
+    font-weight: bold;
+}
+
+.back-to-list {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+}
+
+.back-to-list:hover {
+    background: #e0e0e0;
+}

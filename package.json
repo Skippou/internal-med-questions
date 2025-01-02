@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Internal Medicine Question Bank",
   "scripts": {
-    "clean": "rimraf \"./public/questions\"",
+    "clean": "rimraf \"./public\"",
+    "copy-static": "copyfiles -u 1 \"src/**/*\" public/",
     "index": "node scripts/indexQuestions.js",
     "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public/questions')\"",
-    "build": "npm run clean && npm run convert && npm run index",
+    "build": "npm run clean && npm run copy-static && npm run convert && npm run index",
     "serve": "npm run build && http-server public"
   },
   "dependencies": {
+    "copyfiles": "^2.4.1",
     "gray-matter": "^4.0.3",
     "http-server": "^14.1.1",
     "marked": "^4.0.12",
