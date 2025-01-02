@@ -35,6 +35,8 @@
     </div>
 
     <script>
+        let questionsData = []; // Add this at the top
+
         // Storage utilities
         function saveToLocalStorage(key, value) {
             try {
@@ -58,14 +60,67 @@
             }
         }
 
+        // Move filterQuestions outside loadQuestions
+        function filterQuestions() {
+            const specialtySelect = document.getElementById('specialty');
+            const selectedSpecialty = specialtySelect.value;
+            const selectedDifficulty = document.getElementById('difficulty').value;
+            const viewedFilter = document.getElementById('viewedFilter').value;
+            const viewedQuestions = getFromLocalStorage('viewedQuestions');
+            
+            let filtered = questionsData; // Use the global questionsData
+            if (selectedSpecialty) {
+                filtered = filtered.filter(q => q.specialty === selectedSpecialty);
+            }
+            if (selectedDifficulty) {
+                filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
+            }
+            if (viewedFilter !== 'all') {
+                filtered = filtered.filter(q => {
+                    const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
+                    const isViewed = viewedQuestions.some(viewed => 
+                        viewed.split('/').filter(Boolean).join('/') === normalizedPath
+                    );
+                    return viewedFilter === 'viewed' ? isViewed : !isViewed;
+                });
+            }
+
+            const questionsDiv = document.getElementById('questions');
+            const isGitHubPages = location.hostname.includes('github.io');
+            const basePath = isGitHubPages ? '/internal-med-questions' : '';
+            
+            questionsDiv.innerHTML = filtered.map(q => {
+                const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
+                const isViewed = viewedQuestions.includes(normalizedPath);
+                const questionPath = `${isGitHubPages ? `${basePath}/` : ''}${q.filepath}`;
+                return `
+                    <div class="question-item ${isViewed ? 'viewed' : ''}">
+                        <h3>
+                            ${q.title}
+                            ${isViewed ? `
+                                <span class="viewed-controls">
+                                    <span class="viewed-indicator">Viewed</span>
+                                    <button class="unmark-viewed" onclick="unmarkViewed('${normalizedPath}')">×</button>
+                                </span>
+                            ` : ''}
+                        </h3>
+                        <p>Specialty: ${q.specialty}</p>
+                        <p>Topic: ${q.topic}</p>
+                        <p>Difficulty: ${q.difficulty}</p>
+                        <a href="${questionPath}" target="_blank">View Question</a>
+                    </div>
+                `;
+            }).join('');
+        }
+
         async function loadQuestions() {
             const isGitHubPages = location.hostname.includes('github.io');
             const basePath = isGitHubPages ? '/internal-med-questions' : '';
             const response = await fetch(`${basePath}/questionIndex.json`);
-            const questions = await response.json();
+            questionsData = await response.json(); // Store in global variable
             
             // Populate specialty dropdown
-            const specialties = [...new Set(questions.map(q => q.specialty))].sort();
+            const specialties = [...new Set(questionsData.map(q => q.specialty))].sort();
             const specialtySelect = document.getElementById('specialty');
             specialties.forEach(specialty => {
                 const option = document.createElement('option');
@@ -74,54 +129,6 @@
                 specialtySelect.appendChild(option);
             });
 
-            function filterQuestions() {
-                const selectedSpecialty = specialtySelect.value;
-                const selectedDifficulty = document.getElementById('difficulty').value;
-                const viewedFilter = document.getElementById('viewedFilter').value;
-                const viewedQuestions = getFromLocalStorage('viewedQuestions');
-                
-                let filtered = questions;
-                if (selectedSpecialty) {
-                    filtered = filtered.filter(q => q.specialty === selectedSpecialty);
-                }
-                if (selectedDifficulty) {
-                    filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
-                }
-                if (viewedFilter !== 'all') {
-                    filtered = filtered.filter(q => {
-                        const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
-                        const isViewed = viewedQuestions.some(viewed => 
-                            viewed.split('/').filter(Boolean).join('/') === normalizedPath
-                        );
-                        return viewedFilter === 'viewed' ? isViewed : !isViewed;
-                    });
-                }
-
-                const questionsDiv = document.getElementById('questions');
-                questionsDiv.innerHTML = filtered.map(q => {
-                    const normalizedPath = q.filepath.split('/').filter(Boolean).join('/');
-                    const isViewed = viewedQuestions.includes(normalizedPath);
-                    const questionPath = `${isGitHubPages ? `${basePath}/` : ''}${q.filepath}`;
-                    return `
-                        <div class="question-item ${isViewed ? 'viewed' : ''}">
-                            <h3>
-                                ${q.title}
-                                ${isViewed ? `
-                                    <span class="viewed-controls">
-                                        <span class="viewed-indicator">Viewed</span>
-                                        <button class="unmark-viewed" onclick="unmarkViewed('${normalizedPath}')">×</button>
-                                    </span>
-                                ` : ''}
-                            </h3>
-                            <p>Specialty: ${q.specialty}</p>
-                            <p>Topic: ${q.topic}</p>
-                            <p>Difficulty: ${q.difficulty}</p>
-                            <a href="${questionPath}" target="_blank">View Question</a>
-                        </div>
-                    `;
-                }).join('');
-            }
-
             specialtySelect.addEventListener('change', filterQuestions);
             document.getElementById('difficulty').addEventListener('change', filterQuestions);
             document.getElementById('viewedFilter').addEventListener('change', filterQuestions);
@@ -129,14 +136,14 @@
             filterQuestions();
         }
 
-        // Add unmark function
+        // Update unmark function to call filterQuestions
         window.unmarkViewed = function(path) {
             const viewedQuestions = getFromLocalStorage('viewedQuestions');
             const index = viewedQuestions.indexOf(path);
             if (index > -1) {
                 viewedQuestions.splice(index, 1);
                 saveToLocalStorage('viewedQuestions', viewedQuestions);
-                filterQuestions(); // Refresh the list
+                filterQuestions(); // This will now work since it's in the global scope
             }
         };
 
