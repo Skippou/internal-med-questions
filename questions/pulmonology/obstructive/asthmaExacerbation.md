@@ -3,7 +3,7 @@ id: PULM004
 specialty: pulmonology
 topic: obstructive
 difficulty: medium
-tags: [respiratory, treatment, emergencies]
+tags: [respiratory, treatment, emergencies, copilotO1]
 created: 2025-01-02
 lastUpdated: 2025-01-02
 ---

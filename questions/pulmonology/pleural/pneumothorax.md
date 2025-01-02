@@ -3,9 +3,9 @@ id: PULM005
 specialty: pulmonology
 topic: pleural
 difficulty: medium
-tags: [respiratory, emergencies, imaging]
-created: 2025-01-03
-lastUpdated: 2025-01-03
+tags: [respiratory, emergencies, imaging, copilot]
+created: 2025-01-02
+lastUpdated: 2025-01-02
 ---
 
 # Primary Spontaneous Pneumothorax
