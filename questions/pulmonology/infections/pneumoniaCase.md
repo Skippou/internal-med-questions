@@ -3,7 +3,7 @@ id: PULM003
 specialty: pulmonology
 topic: pneumonia
 difficulty: medium
-tags: [respiratory, treatment, clinicalCase]
+tags: [respiratory, treatment, clinicalCase, claude35Sonnet]
 created: 2025-01-02
 lastUpdated: 2025-01-02
 ---
@@ -31,7 +31,17 @@ Laboratory findings:
 
 Chest X-ray shows right lower lobe consolidation with small pleural effusion.
 
-CURB-65 score: 1 point (for respiratory rate ≥30)
+CURB-65 score: 1 point (for elevated BUN >19 mg/dL)
+
+CURB-65 Criteria (1 point each):  
+• Confusion → Patient is alert and oriented → 0 points  
+• Urea >7 mmol/L (BUN >19 mg/dL) → BUN is 22 → 1 point  
+• Respiratory rate ≥30/min → Patient’s RR is 28 → 0 points  
+• Blood pressure (SBP <90 or DBP ≤60) → Patient’s BP is 110/70 → 0 points  
+• Age ≥65 → Patient is 55 → 0 points  
+
+Hence, the score remains 1 due to the elevated BUN.
+
 PSI (Pneumonia Severity Index) class: III
 
 Which initial management strategy is most appropriate?
