@@ -50,7 +50,7 @@ function indexQuestions(questionsDir) {
 
 // Setup paths
 const sourceQuestionsDir = path.join(__dirname, '../questions');
-const outputPath = process.env.NODE_ENV === 'production'
+const outputPath = process.argv.includes('--production') 
   ? path.join(__dirname, '../dist')
   : path.join(os.tmpdir(), 'internal-med-questions');
 

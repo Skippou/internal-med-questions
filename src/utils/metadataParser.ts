@@ -8,6 +8,8 @@ export interface QuestionMetadata {
   lastUpdated?: string;
 }
 
+type MetadataKey = keyof QuestionMetadata;
+
 export function parseMetadata(content: string): { metadata: QuestionMetadata; content: string } {
   const defaultMetadata: QuestionMetadata = {
     id: 'UNKNOWN',
@@ -19,38 +21,54 @@ export function parseMetadata(content: string): { metadata: QuestionMetadata; co
 
   try {
     const lines = content.split('\n');
-    const headerMatch = content.match(/^(?:##?\s+)?(.+?)(?:\n\n|\n(?![\w-]+:))/s);
-    
-    if (!headerMatch) {
-      return { metadata: defaultMetadata, content };
-    }
+    const h2Regex = /^##\s+(.+)$/;
+    let metadataText = '';
+    let mainContent = content;
 
-    const metadataText = headerMatch[1];
-    const mainContent = content.slice(headerMatch[0].length);
-    const metadata: Partial<QuestionMetadata> = {};
-
-    // Parse metadata string
-    const metadataRegex = /(\w+):\s*([^\n]+?)(?=\s+\w+:|$)/g;
-    let match;
-    
-    while ((match = metadataRegex.exec(metadataText)) !== null) {
-      const [, key, value] = match;
-      if (key === 'tags') {
-        const tagsStr = value.trim().replace(/^\[|\]$/g, '');
-        metadata.tags = tagsStr ? tagsStr.split(',').map(t => t.trim()) : [];
-      } else {
-        metadata[key] = value.trim();
+    // Find the metadata h2 block
+    for (let i = 0; i < lines.length; i++) {
+      const match = lines[i].match(h2Regex);
+      if (match) {
+        metadataText = match[1];
+        mainContent = lines.slice(i + 1).join('\n');
+        break;
       }
     }
 
+    if (!metadataText) {
+      console.warn('No metadata found in content');
+      return { metadata: defaultMetadata, content: mainContent };
+    }
+
+    const metadata: Partial<QuestionMetadata> = {};
+    const metadataLines = metadataText.split('\n');
+
+    metadataLines.forEach(line => {
+      const [key, value] = line.split(':').map(s => s.trim());
+      if (key && value && isMetadataKey(key)) {
+        if (key === 'tags') {
+          const tagsMatch = value.match(/\[(.*)\]/);
+          metadata.tags = tagsMatch ? 
+            tagsMatch[1].split(',').map(t => t.trim()).filter(Boolean) : 
+            defaultMetadata.tags;
+        } else {
+          metadata[key] = value;
+        }
+      }
+    });
+
     return {
       metadata: { ...defaultMetadata, ...metadata } as QuestionMetadata,
-      content: mainContent.trim()
+      content: mainContent
     };
   } catch (error) {
     console.error('Error parsing metadata:', error);
     return { metadata: defaultMetadata, content };
   }
+}
+
+function isMetadataKey(key: string): key is MetadataKey {
+  return ['id', 'specialty', 'topic', 'difficulty', 'tags', 'created', 'lastUpdated'].includes(key);
 }
 
 export function formatMetadata(metadata: QuestionMetadata): string {

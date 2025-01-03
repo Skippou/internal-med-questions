@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import QuestionList from './components/QuestionList';
 import QuestionView from './components/QuestionView';
-import React from 'react';
 
 export default function App() {
   const isGitHubPages = location.hostname.includes('github.io');

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/indexQuestions.js && vite",
-    "build": "NODE_ENV=production node scripts/indexQuestions.js && tsc && vite build",
+    "build": "node scripts/indexQuestions.js && tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
+    "@types/marked": "^5.0.2",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
