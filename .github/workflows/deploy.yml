@@ -27,10 +27,12 @@ jobs:
           node-version: '18'
           cache: 'npm'
       - run: npm ci
-      - run: npm run build
+      - name: Build with base URL
+        run: |
+          npm run build -- --base=/internal-med-questions/
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: ./public
+          path: ./dist
 
   deploy:
     needs: build

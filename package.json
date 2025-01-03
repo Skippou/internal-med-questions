@@ -2,21 +2,30 @@
   "name": "internal-med-questions",
   "version": "1.0.0",
   "description": "Internal Medicine Question Bank",
+  "type": "module",
   "scripts": {
-    "clean": "rimraf \"./public\"",
-    "copy-static": "copyfiles -u 1 \"src/**/*\" public/",
-    "index": "node scripts/indexQuestions.js",
-    "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public/questions')\"",
-    "build": "npm run clean && npm run copy-static && npm run convert && npm run index",
-    "serve": "npm run build && http-server public",
-    "start": "npm run clean && npm run build && npm run serve"
+    "dev": "node scripts/indexQuestions.js && vite",
+    "build": "NODE_ENV=production node scripts/indexQuestions.js && tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "copyfiles": "^2.4.1",
     "gray-matter": "^4.0.3",
-    "http-server": "^14.1.1",
     "marked": "^4.0.12",
-    "rimraf": "^3.0.2"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-markdown": "^2.2.0"
   },
   "license": "CC BY-NC-SA 4.0"
 }
