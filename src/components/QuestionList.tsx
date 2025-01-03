@@ -12,7 +12,10 @@ export default function QuestionList() {
   });
 
   useEffect(() => {
-    fetch('/questionIndex.json')
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/internal-med-questions' : '';
+    
+    fetch(`${basePath}/questionIndex.json`)
       .then(res => res.json())
       .then(setQuestions);
   }, []);

@@ -50,18 +50,21 @@ function indexQuestions(questionsDir) {
 // Setup paths
 const sourceQuestionsDir = path.join(__dirname, '../questions');
 const distDir = path.join(__dirname, '../dist');
+const distQuestionsDir = path.join(distDir, 'questions');
 
-// Ensure output directory exists
+// Ensure dist directory exists
 fs.mkdirSync(distDir, { recursive: true });
+fs.mkdirSync(distQuestionsDir, { recursive: true });
 
-// Generate index
+// Copy all questions to dist
+fs.cpSync(sourceQuestionsDir, distQuestionsDir, { 
+  recursive: true,
+  force: true 
+});
+
+// Generate and write index
 const index = indexQuestions(sourceQuestionsDir);
-
-// Write index to dist directory
 fs.writeFileSync(
   path.join(distDir, 'questionIndex.json'),
   JSON.stringify(index, null, 2)
 );
-
-// Copy questions to dist
-fs.cpSync(sourceQuestionsDir, path.join(distDir, 'questions'), { recursive: true });
