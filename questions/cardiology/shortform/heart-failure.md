@@ -24,11 +24,16 @@ B) ACE inhibitor/ARB - Cornerstone of HFrEF therapy
 </details>
 
 ## Question 2
-NYHA class III heart failure means:
-A) No symptoms
-B) Symptoms with ordinary activity
-C) Symptoms with minimal activity
-D) Symptoms at rest
+NYHA class III heart failure is characterized by:
+A) Asymptomatic
+B) Symptoms with ordinary physical activity
+C) Symptoms at rest
+D) Symptoms with minimal exertion
+
+<details>
+<summary>Answer</summary>
+D) Symptoms with minimal exertion - NYHA III represents marked limitation of physical activity
+</details>
 
 <details>
 <summary>Answer</summary>
