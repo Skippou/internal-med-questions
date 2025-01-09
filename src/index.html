@@ -36,6 +36,15 @@
                     <option value="unviewed">Unviewed Only</option>
                 </select>
             </div>
+
+            <div class="filter-group">
+                <label for="typeFilter">Question Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="regular">Regular</option>
+                    <option value="shortform">Shortform</option>
+                </select>
+            </div>
         </div>
         <!-- Add count display -->
         <div id="questionCount" class="question-count"></div>
@@ -49,15 +58,17 @@
             return {
                 specialties: params.getAll('specialty'),
                 difficulties: params.getAll('difficulty'),
-                viewed: params.get('viewed') || 'all'
+                viewed: params.get('viewed') || 'all',
+                type: params.get('type') || 'all'
             };
         }
 
-        function updateUrlParams(specialties, difficulties, viewed) {
+        function updateUrlParams(specialties, difficulties, viewed, type) {
             const params = new URLSearchParams();
             specialties.forEach(s => params.append('specialty', s));
             difficulties.forEach(d => params.append('difficulty', d));
             if (viewed !== 'all') params.set('viewed', viewed);
+            if (type !== 'all') params.set('type', type);
             
             const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
             history.pushState({}, '', newUrl);
@@ -94,9 +105,10 @@
             const selectedSpecialties = Array.from(specialtySelect.selectedOptions).map(opt => opt.value).filter(Boolean);
             const selectedDifficulties = Array.from(document.getElementById('difficulty').selectedOptions).map(opt => opt.value).filter(Boolean);
             const viewedFilter = document.getElementById('viewedFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
 
             if (updateUrl) {
-                updateUrlParams(selectedSpecialties, selectedDifficulties, viewedFilter);
+                updateUrlParams(selectedSpecialties, selectedDifficulties, viewedFilter, typeFilter);
             }
 
             const viewedQuestions = getFromLocalStorage('viewedQuestions');
@@ -116,6 +128,9 @@
                     );
                     return viewedFilter === 'viewed' ? isViewed : !isViewed;
                 });
+            }
+            if (typeFilter !== 'all') {
+                filtered = filtered.filter(q => q.type === typeFilter);
             }
 
             // Update question count
@@ -206,11 +221,13 @@
             });
             
             document.getElementById('viewedFilter').value = urlParams.viewed;
+            document.getElementById('typeFilter').value = urlParams.type;
 
             // Add event listeners
             specialtySelect.addEventListener('change', () => filterQuestions(true));
             difficultySelect.addEventListener('change', () => filterQuestions(true));
             document.getElementById('viewedFilter').addEventListener('change', () => filterQuestions(true));
+            document.getElementById('typeFilter').addEventListener('change', () => filterQuestions(true));
             
             // Handle browser back/forward
             window.addEventListener('popstate', () => {
@@ -222,6 +239,7 @@
                     option.selected = params.difficulties.includes(option.value);
                 });
                 document.getElementById('viewedFilter').value = params.viewed;
+                document.getElementById('typeFilter').value = params.type;
                 filterQuestions(false);
             });
 
