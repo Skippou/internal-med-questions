@@ -4,11 +4,13 @@
   "description": "Internal Medicine Question Bank",
   "scripts": {
     "clean": "rimraf \"./public\"",
-    "copy-static": "copyfiles -u 1 \"src/**/*\" public/",
+    "create-dirs": "mkdirp public/styles public/scripts public/templates",
+    "copy-assets": "npm run create-dirs && copyfiles -f \"src/styles/*\" \"public/styles/\" && copyfiles -f \"src/scripts/*\" \"public/scripts/\" && copyfiles -f \"src/templates/*\" \"public/templates/\"",
+    "copy-index": "copyfiles -f \"src/index.html\" \"public/\"",
+    "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public')\"",
     "index": "node scripts/indexQuestions.js",
-    "convert": "node -e \"require('./scripts/convertMarkdown')('./questions', './public/questions')\"",
-    "build": "npm run clean && npm run copy-static && npm run convert && npm run index",
-    "serve": "npm run build && http-server public",
+    "build": "npm run clean && npm run copy-assets && npm run copy-index && npm run convert && npm run index",
+    "serve": "npm run build && http-server public -c-1 --cors -d false -p 8081",
     "start": "npm run clean && npm run build && npm run serve"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
     "gray-matter": "^4.0.3",
     "http-server": "^14.1.1",
     "marked": "^4.0.12",
+    "mkdirp": "^3.0.1",
     "rimraf": "^3.0.2"
   },
   "license": "CC BY-NC-SA 4.0"

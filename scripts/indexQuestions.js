@@ -30,7 +30,7 @@ function indexQuestions(questionsDir) {
                             .replace('.md', '.html');
                             
                         questions.push({
-                            filepath: `questions/${relativePath}`,
+                            filepath: relativePath,  // Remove 'questions/' prefix
                             specialty: data.specialty,
                             topic: data.topic,
                             difficulty: data.difficulty,

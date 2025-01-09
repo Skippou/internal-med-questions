@@ -1,0 +1,40 @@
+<svg width="500" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Restore solid white background -->
+    <rect width="500" height="400" fill="white"/>
+
+    <!-- 1mm minor grid -->
+    <pattern id="smallGrid" width="5" height="5" patternUnits="userSpaceOnUse">
+        <path d="M 5 0 L 0 0 0 5" fill="none" stroke="black" stroke-width="0.5"/>
+    </pattern>
+
+    <!-- 5mm major grid -->
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+        <rect width="25" height="25" fill="url(#smallGrid)"/>
+        <path d="M 25 0 L 0 0 0 25" fill="none" stroke="black" stroke-width="1"/>
+    </pattern>
+
+    <!-- Apply the larger grid across the SVG -->
+    <rect width="500" height="400" fill="url(#grid)"/>
+
+    <!-- ECG calibration marker -->
+    <path d="M 50 50 L 50 0 L 75 0 L 75 50" 
+          stroke="black" 
+          stroke-width="1" 
+          fill="none"/>
+          
+    <!-- Lead labels -->
+    <g font-family="Arial" font-size="12">
+        <text x="10" y="30">I</text>
+        <text x="10" y="80">II</text>
+        <text x="10" y="130">III</text>
+        <text x="10" y="180">aVR</text>
+        <text x="10" y="230">aVL</text>
+        <text x="10" y="280">aVF</text>
+        <text x="260" y="30">V1</text>
+        <text x="260" y="80">V2</text>
+        <text x="260" y="130">V3</text>
+        <text x="260" y="180">V4</text>
+        <text x="260" y="230">V5</text>
+        <text x="260" y="280">V6</text>
+    </g>
+</svg>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="ecg-container">
+        <!-- ECG Grid will be inserted here -->
+        <div id="ecg-display"></div>
+        
+        <div class="ecg-controls">
+            <button onclick="toggleCalipers()">Toggle Calipers</button>
+            <button onclick="measureInterval()">Measure Interval</button>
+            <button onclick="resetView()">Reset View</button>
+        </div>
+        
+        <div class="ecg-measurements">
+            <div>Rate: <span id="rate">75</span> bpm</div>
+            <div>PR: <span id="pr">160</span> ms</div>
+            <div>QRS: <span id="qrs">80</span> ms</div>
+            <div>QT: <span id="qt">400</span> ms</div>
+        </div>
+    </div>
+
+    <script src="../scripts/ecg-generator.js"></script>
+    <script src="../scripts/svg-renderer.js"></script>
+    <script>
+        let renderer;
+        let generator;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderer = new SVGRenderer(document.getElementById('ecg-display'));
+            renderer.init();
+            
+            generator = new ECGGenerator(renderer.svg);
+            
+            // Load ECG data from markdown frontmatter
+            const ecgData = {
+                rhythm: 'sinus',
+                rate: 102,
+                waveforms: {
+                    'I': 'normal',
+                    'II': 'stDepression',
+                    'III': 'stDepression',
+                    'aVR': 'stElevation',
+                    'aVL': 'normal',
+                    'aVF': 'stDepression',
+                    'V1': 'qwave',
+                    'V2': 'stElevation4mm',
+                    'V3': 'stElevation4mm',
+                    'V4': 'stElevation3mm',
+                    'V5': 'tWaveInversion',
+                    'V6': 'tWaveInversion'
+                }
+            };
+            generator.renderFullECG(ecgData);
+        });
+
+        function toggleCalipers() {
+            renderer.toggleMeasurementMode();
+        }
+
+        function measureInterval() {
+            renderer.clearMeasurements();
+            renderer.toggleMeasurementMode();
+        }
+
+        function resetView() {
+            renderer.clearMeasurements();
+            generator.renderFullECG(ecgData);
+        }
+    </script>
+</body>
+</html>
