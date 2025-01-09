@@ -5,8 +5,8 @@ topic: basics
 difficulty: easy
 type: shortform
 tags: [cardiology, basics, ecg, pharmacology, copilot]
-created: 2025-01-06
-lastUpdated: 2025-01-06
+created: 2025-01-09
+lastUpdated: 2025-01-09
 ---
 
 # Cardiology Quick Questions

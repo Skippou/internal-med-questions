@@ -5,8 +5,8 @@ topic: arrhythmias
 difficulty: medium
 type: shortform
 tags: [cardiology, arrhythmias, ecg, emergencies, copilot]
-created: 2025-01-06
-lastUpdated: 2025-01-06
+created: 2025-01-09
+lastUpdated: 2025-01-09
 ---
 
 # Arrhythmia Quick Questions
