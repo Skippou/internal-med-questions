@@ -13,10 +13,11 @@ lastUpdated: 2025-01-09
 
 ## Question 1
 Most specific murmur for aortic stenosis:
-A) Late-peaking systolic ejection
-B) Holosystolic
-C) Early systolic
-D) Diastolic decrescendo
+
+- A) Late-peaking systolic ejection
+- B) Holosystolic
+- C) Early systolic
+- D) Diastolic decrescendo
 
 <details>
 <summary>Answer</summary>
@@ -25,10 +26,11 @@ A) Late-peaking systolic ejection - Classic AS finding
 
 ## Question 2
 First sign of rheumatic mitral stenosis:
-A) Dyspnea on exertion
-B) Atrial fibrillation
-C) Hemoptysis
-D) Right heart failure
+
+- A) Dyspnea on exertion
+- B) Atrial fibrillation
+- C) Hemoptysis
+- D) Right heart failure
 
 <details>
 <summary>Answer</summary>
@@ -37,10 +39,11 @@ A) Dyspnea on exertion - Earliest symptom
 
 ## Question 3
 Critical aortic valve area is:
-A) <1.5 cm²
-B) <1.0 cm²
-C) <0.8 cm²
-D) <0.6 cm²
+
+- A) <1.5 cm²
+- B) <1.0 cm²
+- C) <0.8 cm²
+- D) <0.6 cm²
 
 <details>
 <summary>Answer</summary>
@@ -49,10 +52,11 @@ B) <1.0 cm² - Severe stenosis threshold
 
 ## Question 4
 Most common cause of acute mitral regurgitation:
-A) Endocarditis
-B) Papillary muscle rupture
-C) Chordal rupture
-D) Rheumatic disease
+
+- A) Endocarditis
+- B) Papillary muscle rupture
+- C) Chordal rupture
+- D) Rheumatic disease
 
 <details>
 <summary>Answer</summary>
@@ -61,10 +65,11 @@ B) Papillary muscle rupture - Post-MI complication
 
 ## Question 5
 Indication for surgery in asymptomatic severe AR:
-A) LVEF <50%
-B) LVESD >50mm
-C) LVEDD >65mm
-D) All of the above
+
+- A) LVEF <50%
+- B) LVESD >50mm
+- C) LVEDD >65mm
+- D) All of the above
 
 <details>
 <summary>Answer</summary>

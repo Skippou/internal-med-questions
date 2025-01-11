@@ -13,10 +13,11 @@ lastUpdated: 2025-01-09
 
 ## Question 1
 Drug of choice for stable wide-complex tachycardia:
-A) Adenosine
-B) Diltiazem
-C) Amiodarone
-D) Metoprolol
+
+- A) Adenosine
+- B) Diltiazem
+- C) Amiodarone
+- D) Metoprolol
 
 <details>
 <summary>Answer</summary>
@@ -25,10 +26,11 @@ C) Amiodarone - Safe in structural heart disease
 
 ## Question 2
 Which finding suggests VT over SVT with aberrancy:
-A) Fusion beats
-B) RS complex >100ms
-C) AV dissociation
-D) All of the above
+
+- A) Fusion beats
+- B) RS complex >100ms
+- C) AV dissociation
+- D) All of the above
 
 <details>
 <summary>Answer</summary>
@@ -37,10 +39,11 @@ D) All of the above - Brugada criteria
 
 ## Question 3
 Most common cause of Torsades de Pointes:
-A) Congenital long QT
-B) Drug-induced QT prolongation
-C) Hypokalemia
-D) Bradycardia
+
+- A) Congenital long QT
+- B) Drug-induced QT prolongation
+- C) Hypokalemia
+- D) Bradycardia
 
 <details>
 <summary>Answer</summary>
@@ -49,10 +52,11 @@ B) Drug-induced QT prolongation - Check QTc with risk medications
 
 ## Question 4
 Best acute treatment for SVT with hypotension:
-A) Adenosine
-B) Synchronized cardioversion
-C) Metoprolol
-D) Diltiazem
+
+- A) Adenosine
+- B) Synchronized cardioversion
+- C) Metoprolol
+- D) Diltiazem
 
 <details>
 <summary>Answer</summary>
@@ -61,10 +65,11 @@ B) Synchronized cardioversion - Unstable requires immediate electrical therapy
 
 ## Question 5
 First line for rate control in AF with preserved EF:
-A) Digoxin
-B) Beta blocker
-C) Calcium channel blocker
-D) Amiodarone
+
+- A) Digoxin
+- B) Beta blocker
+- C) Calcium channel blocker
+- D) Amiodarone
 
 <details>
 <summary>Answer</summary>
