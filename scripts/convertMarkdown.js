@@ -41,15 +41,43 @@ function convertMarkdownFiles(questionsDir, outputDir) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.topic || 'Medical Question'}</title>
     <script>
-        // Dynamically set correct CSS path based on environment
-        const isGitHubPages = location.hostname.includes('github.io');
-        const cssPath = isGitHubPages ? '/internal-med-questions/styles/main.css' : '/styles/main.css';
-        document.write('<link rel="stylesheet" href="' + cssPath + '">');
+        // Path utilities for consistent local and GitHub Pages handling
+        const pathUtils = {
+            isGitHubPages: location.hostname.includes('github.io'),
+            
+            getBasePath() {
+                return this.isGitHubPages ? '/internal-med-questions' : '';
+            },
+
+            getStylePath() {
+                return \`\${this.getBasePath()}/styles/main.css\`;
+            },
+
+            getIndexPath() {
+                return \`\${this.getBasePath()}/index.html\`;
+            },
+
+            // Preserve URL parameters when navigating back
+            getBackUrl() {
+                const params = new URLSearchParams(window.location.search);
+                const indexPath = this.getIndexPath();
+                return params.toString() ? \`\${indexPath}?\${params.toString()}\` : indexPath;
+            }
+        };
+
+        // Add stylesheet
+        document.write('<link rel="stylesheet" href="' + pathUtils.getStylePath() + '">');
     </script>
 </head>
 <body>
-    <a href="${pathToRoot}index.html" class="back-to-list">← Back to Questions</a>
     <script>
+        // Dynamic back button with preserved filters
+        const backButton = document.createElement('a');
+        backButton.href = pathUtils.getBackUrl();
+        backButton.className = 'back-to-list';
+        backButton.textContent = '← Back to Questions';
+        document.body.insertBefore(backButton, document.body.firstChild);
+
         function saveToLocalStorage(key, value) {
             try {
                 localStorage.setItem(key, JSON.stringify(value));
