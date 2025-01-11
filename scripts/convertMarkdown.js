@@ -40,7 +40,7 @@ function convertMarkdownFiles(questionsDir, outputDir) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.topic || 'Medical Question'}</title>
-    <link rel="stylesheet" href="${pathToRoot}styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
     <a href="${pathToRoot}index.html" class="back-to-list">← Back to Questions</a>
