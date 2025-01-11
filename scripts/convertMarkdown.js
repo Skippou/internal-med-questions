@@ -40,7 +40,12 @@ function convertMarkdownFiles(questionsDir, outputDir) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${data.topic || 'Medical Question'}</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <script>
+        // Dynamically set correct CSS path based on environment
+        const isGitHubPages = location.hostname.includes('github.io');
+        const cssPath = isGitHubPages ? '/internal-med-questions/styles/main.css' : '/styles/main.css';
+        document.write('<link rel="stylesheet" href="' + cssPath + '">');
+    </script>
 </head>
 <body>
     <a href="${pathToRoot}index.html" class="back-to-list">← Back to Questions</a>
