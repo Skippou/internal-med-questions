@@ -1,0 +1,7 @@
+[
+  {
+    "key": "ctrl+k ctrl+m",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Open Medical Context Files"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Open Medical Context Files",
+      "type": "shell",
+      "windows": {
+        "command": "code-insiders -g ${workspaceFolder}/.copilot-instructions.md ${workspaceFolder}/questions/cardiology/acute/acuteCoronarySyndrome.md ${workspaceFolder}/questions/cardiology/shortform/arrhythmias.md ${workspaceFolder}/questions/pulmonology/ards/ventStrategy.md"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

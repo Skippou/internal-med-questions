@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "github.copilot-chat"
+    ]
+  },
+  "settings": {
+    "files.associations": {
+      "*.md": "markdown"
+    }
+  }
+}
